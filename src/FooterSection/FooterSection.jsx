@@ -63,10 +63,10 @@ function FooterSection() {
   ];
 
   return (
-    <footer className="  mt-52 flex justify-center w-full text-white p-4 ">
-      <div className="w-[70%] flex flex-col items-center justify-center border-2 border-white">
+    <footer className=" mt-52 flex items-center justify-center w-full  text-white p-4 ">
+      <div className="w-[80%] flex flex-col items-center justify-center ">
         <IconeQuestion />
-        <div className="footer-links flex">
+        <div className="footer-links grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-16 w-full">
           {footerData.map((data, index) => (
             <FooterLinks
               key={index}

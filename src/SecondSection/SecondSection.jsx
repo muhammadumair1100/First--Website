@@ -33,7 +33,7 @@ function SecondSection() {
     <section className="second-section w-full h-full flex justify-center items-center border-5 border-purple-600 ">
       <div className="w-[80%] flex flex-col items-center ">
         <SecondHeadings />
-        <div className="grid grid-cols-2 mt-16 w-[85%] gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-16 w-full gap-5">
           {cardsData.map((card, index) => (
             <SecondCards
               key={index}

@@ -66,7 +66,7 @@ function Card() {
   ];
 
   return (
-    <div className="card grid grid-cols-3 gap-6 w-full rounded-md mx-28   p-4 ">
+    <div className="card  grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full rounded-md mx-4  p-4 ">
       {cardsData.map((c, i) => {
         return (
           <div

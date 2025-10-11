@@ -1,6 +1,6 @@
 function IconeQuestion() {
   return (
-    <div className="icon-question flex gap-2 p-2 ">
+    <div className="icon-question pl-28  flex gap-2  hover:cursor-pointer font-semibold">
       <div>
         <span className="material-symbols-outlined text-[40px] text-black pt-7 ">
           token

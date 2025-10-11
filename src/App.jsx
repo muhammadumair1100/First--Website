@@ -8,15 +8,15 @@ import FooterSection from "./FooterSection/FooterSection";
 
 function App() {
   return (
-    <>
+    <div className="w-full h-full">
       <Navbar />
-      <main>
+      <main className="bg-white w-full h-full overflow-x-hidden">
         <HeroSection />
         <FirstSection />
         <SecondSection />
         <FooterSection />
       </main>
-    </>
+    </div>
   );
 }
 

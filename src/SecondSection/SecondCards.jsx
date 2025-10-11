@@ -1,6 +1,6 @@
 function SecondCards({ cardIcone, cardHeading, cardText }) {
   return (
-    <div className="second-cards bg-blue-100/50 flex flex-col    rounded-lg p-8  ">
+    <div className="second-cards bg-blue-100/50 flex flex-col   rounded-lg p-8  ">
       <span
         dangerouslySetInnerHTML={{ __html: cardIcone }}
         className="text-3xl mb-2"
