@@ -30,7 +30,7 @@ function SecondSection() {
   ];
 
   return (
-    <section className="second-section w-full h-full flex justify-center items-center border-5 border-purple-600 ">
+    <section className="second-section w-full mb-52 h-full flex justify-center items-center border-5 border-purple-600 ">
       <div className="w-[80%] flex flex-col items-center ">
         <SecondHeadings />
         <div className="grid grid-cols-1 md:grid-cols-2 mt-16 w-full gap-5">

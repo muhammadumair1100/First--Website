@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
+
 function IconName({ name }) {
   return (
     <div>
-      <h1 className=" font-bold flex items-center gap-2  hover:text-blue-600">
+      <Link
+        to="/"
+        className=" font-bold flex items-center gap-2  hover:text-blue-600"
+      >
         <span className="material-symbols-outlined text-[35px]">token</span>
-        <a href="#" className="text-lg">
-          {name}
-        </a>
-      </h1>
+        <p className="text-lg">{name}</p>
+      </Link>
     </div>
   );
 }

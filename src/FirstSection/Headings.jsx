@@ -1,11 +1,10 @@
 function Headings({ title, description }) {
-  console.log(title);
   return (
     <div className="headings p-6 ">
       <span className="text-sm text-white bg-green-600 px-3  rounded-full">
         FREE
       </span>
-      <h1 className="text-xl font-semibold mt-2">{title}</h1>
+      <h1 className="text-lg font-medium mt-2">{title}</h1>
       <p className="text-gray-600 mt-2 text-[14px] font-normal">
         {description}
       </p>

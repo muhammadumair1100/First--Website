@@ -6,7 +6,7 @@ function FooterLinks({ heading, links }) {
         <a
           href="#"
           key={index}
-          className="text-sm font-medium text-gray-700 mt-3  hover:text-blue-700"
+          className="text-xs font-medium text-gray-700 mt-3  hover:text-blue-700"
         >
           {link}
         </a>
