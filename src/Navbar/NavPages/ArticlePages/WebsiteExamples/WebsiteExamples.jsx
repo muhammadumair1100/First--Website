@@ -2,16 +2,16 @@ import HeroSection from "./HeroSection";
 import SecondSection from "../WebsiteDesign/SecondSection";
 import FirstSection from "../WebsiteDesign/FirstSection";
 import {
-  emailFirstSection,
-  emailSectionSection,
-} from "../../Pagesdata/emaildesing";
+  websiteExampleFirstSection,
+  websiteExampleSectionSection,
+} from "../../Pagesdata/websiteexamples";
 
 const EmailDesign = () => {
   return (
     <div>
       <HeroSection />
-      <FirstSection cardData={emailFirstSection} />
-      <SecondSection cardData={emailSectionSection} />
+      <FirstSection cardData={websiteExampleFirstSection} />
+      <SecondSection cardData={websiteExampleSectionSection} />
     </div>
   );
 };

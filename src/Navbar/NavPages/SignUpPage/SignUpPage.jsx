@@ -1,10 +1,80 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function SignUpPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    reTypePassword: "",
+  });
+
+  const [user, setUser] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+  const [validation, setValidation] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleData = (e) => {
+    setValidation("");
+    setFormData((user) => {
+      return { ...user, [e.target.name]: e.target.value };
+    });
+  };
+
+  const showValidation = (validMesg) => {
+    setValidation(validMesg);
+  };
+
+  useEffect(() => {
+    const oldUsersData = JSON.parse(localStorage.getItem("user")) || [];
+    setUser(oldUsersData);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.reTypePassword) {
+      showValidation("Passwords do not match");
+      return;
+    }
+
+    if (!isChecked) {
+      showValidation("Agree the Privacy Policy");
+      return;
+    }
+
+    const userExists = user.some((user) => user.email === formData.email);
+    if (userExists) {
+      showValidation("Email already registered log in instead");
+      return;
+    }
+
+    const updateUser = [...user, formData];
+    setUser(updateUser);
+    localStorage.setItem("user", JSON.stringify(updateUser));
+
+    navigate("/product");
+    showValidation("");
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      reTypePassword: "",
+    });
+  };
+
   return (
     <div className="pt-32 pb-12 mb-28 bg-gray-100/50 flex flex-col items-center justify-center">
       <h1 className="text-center font-medium text-xl">
         Start using Designmodo apps
       </h1>
-      <form className="bg-white mt-8 rounded-md  shadow-sm border p-10 w-[100%] max-w-md ">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white mt-8 rounded-md  shadow-sm border p-10 w-[100%] max-w-md "
+      >
         {/* Header */}
 
         {/* Google Button */}
@@ -39,6 +109,55 @@ export default function SignUpPage() {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
+        {validation && (
+          <div className="text-center mb-10 bg-red-100 shadow-xl text-red-500 rounded-xl p-5">
+            <h1>{validation}</h1>
+          </div>
+        )}
+
+        <div>
+          {/* First Name Input */}
+          <label
+            htmlFor="firstName"
+            className="block text-xs text-gray-700 font-normal mb-2"
+          >
+            First Name <span className="text-red-500">*</span>
+          </label>
+
+          <input
+            value={formData.firstName}
+            name="firstName"
+            onChange={handleData}
+            id="firstName"
+            required
+            type="text"
+            placeholder="Enter First Name"
+            className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
+          />
+        </div>
+
+        <div>
+          {/* Last Name Input */}
+          <label
+            htmlFor="lastName"
+            className="block text-xs text-gray-700 font-normal mb-2"
+          >
+            Last Name <span className="text-red-500">*</span>
+          </label>
+
+          {/* Email Input */}
+          <input
+            value={formData.lastName}
+            name="lastName"
+            onChange={handleData}
+            id="lastName"
+            required
+            type="text"
+            placeholder="Enter Last Name"
+            className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
+          />
+        </div>
+
         <div>
           {/* Email Label */}
           <label
@@ -50,10 +169,57 @@ export default function SignUpPage() {
 
           {/* Email Input */}
           <input
+            value={formData.email}
+            name="email"
+            onChange={handleData}
             id="email"
             type="email"
             required
             placeholder="email@domain.com"
+            className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
+          />
+        </div>
+
+        <div>
+          {/* Email Label */}
+          <label
+            htmlFor="password"
+            className="block text-xs text-gray-700 font-normal mb-2"
+          >
+            Password <span className="text-red-500">*</span>
+          </label>
+
+          {/* Email Input */}
+          <input
+            value={formData.password}
+            name="password"
+            onChange={handleData}
+            id="password"
+            type="password"
+            required
+            placeholder="Password"
+            className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
+          />
+        </div>
+
+        <div>
+          {/* Email Label */}
+          <label
+            htmlFor="retypePassword"
+            className="block text-xs text-gray-700 font-normal mb-2"
+          >
+            Re-type Password <span className="text-red-500">*</span>
+          </label>
+
+          {/* Email Input */}
+          <input
+            value={formData.reTypePassword}
+            name="reTypePassword"
+            onChange={handleData}
+            id="retypePassword"
+            type="password"
+            required
+            placeholder="Re-type Password"
             className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
           />
         </div>
@@ -63,6 +229,8 @@ export default function SignUpPage() {
         <div className="flex items-center gap-2 mb-4">
           <input
             type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
             className="w-[20px] h-[20px] mt-1 cursor-pointer accent-blue-500"
           />
           <label className="text-gray-700 leading-snug pt-1 text-xs">

@@ -13,18 +13,19 @@ import SignUpPage from "./Navbar/NavPages/SignUpPage/SignUpPage";
 // Articles
 import Webdesign from "./Navbar/NavPages/ArticlePages/WebsiteDesign/Webdesign";
 import EmailDesign from "./Navbar/NavPages/ArticlePages/EmailDesign/EmailDesign";
-// import WebsiteExamples from "./Navbar/NavPages/ArticlePages/WebsiteExamples/WebsiteExamples";
+import WebsiteExamples from "./Navbar/NavPages/ArticlePages/WebsiteExamples/WebsiteExamples";
 // import EmailMarketing from "./Navbar/NavPages/ArticlePages/EmailMarketing/EmailMarketing";
 // import WebsiteTools from "./Navbar/NavPages/ArticlePages/WebsiteTools/WebsiteTools";
 // import Bootstrap from "./Navbar/NavPages/ArticlePages/Bootstrap/Bootstrap";
 // import Resources from "./Navbar/NavPages/ArticlePages/Resources/Resources";
+import Product from "./Navbar/ProductPage/Product";
 
 function App() {
   const [open, setOpen] = useState(false);
 
   return (
     <BrowserRouter>
-      <div className="w-full h-full">
+      <div className="appSection w-full h-full">
         <Navbar open={open} setOpen={setOpen} />
         <MobileAppArticle open={open} setOpen={setOpen} />
 
@@ -36,11 +37,12 @@ function App() {
           {/* Article Pages */}
           <Route path="/website-design" element={<Webdesign />} />
           <Route path="/email-design" element={<EmailDesign />} />
-          {/* <Route path="/website-examples" element={<WebsiteExamples />} />
-          <Route path="/email-marketing" element={<EmailMarketing />} />
-          <Route path="/website-tools" element={<WebsiteTools />} />
-          <Route path="/bootstrap" element={<Bootstrap />} />
-          <Route path="/resources" element={<Resources />} /> */}
+          <Route path="/website-examples" element={<WebsiteExamples />} />
+          {/* <Route path="/email-marketing" element={<EmailMarketing />} /> */}
+          {/* <Route path="/website-tools" element={<WebsiteTools />} /> */}
+          {/* <Route path="/bootstrap" element={<Bootstrap />} /> */}
+          {/* <Route path="/resources" element={<Resources />} /> */}
+          <Route path="/product" element={<Product />} />
 
           {/* Home */}
           <Route

@@ -1,7 +1,54 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 export default function LoginPage() {
+  const [validation, setValidation] = useState("");
+  const [isChecked, setIsChecked] = useState({
+    rememberCheck: false,
+    agreePrivacy: false,
+  });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleChecks(e) {
+    console.log(e.target.checked);
+    setIsChecked((check) => {
+      return { ...check, [e.target.name]: e.target.checked };
+    });
+  }
+  function handleData(e) {
+    setFormData((data) => {
+      return { ...data, [e.target.name]: e.target.value };
+    });
+  }
+
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const getUser = JSON.parse(localStorage.getItem("user")) || [];
+
+    const emailExist = getUser.find((e) => e.email === formData.email);
+
+    if (!emailExist) {
+      setValidation("Email does not exist");
+    } else if (emailExist.password !== formData.password) {
+      setValidation("Wrong password");
+    } else if (!isChecked.agreePrivacy) {
+      setValidation("Agree privacy policy");
+    } else {
+      navigate("/product");
+    }
+  };
   return (
     <div className="pt-24 pb-12 mb-28 bg-gray-100/50 flex flex-col items-center justify-center">
-      <form className="bg-white mt-8 rounded-md  shadow-sm border p-10 w-[100%] max-w-md ">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white mt-8 rounded-md  shadow-sm border p-10 w-[100%] max-w-md "
+      >
         {/* Header */}
         <h1 className="text-center mb-6 font-medium text-xl">
           Login to Designmodo
@@ -38,6 +85,12 @@ export default function LoginPage() {
           <div className="flex-1 border-t border-gray-300"></div>
         </div>
 
+        {validation && (
+          <div className="text-center mb-10 bg-red-100 shadow-xl text-red-500 rounded-xl p-5">
+            <h1>{validation}</h1>
+          </div>
+        )}
+
         <div>
           {/* Email Label */}
           <label
@@ -51,6 +104,9 @@ export default function LoginPage() {
           <input
             id="email"
             type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleData}
             required
             placeholder="email@domain.com"
             className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
@@ -67,6 +123,9 @@ export default function LoginPage() {
           <input
             id="password"
             type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleData}
             required
             placeholder="Password"
             className="w-full text-sm border border-gray-300 rounded-lg px-4 py-3 mb-6 hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:shadow-lg transition-all"
@@ -76,6 +135,9 @@ export default function LoginPage() {
         {/* Checkbox */}
         <div className="flex items-center gap-2 mb-4">
           <input
+            onChange={handleChecks}
+            name="rememberCheck"
+            checked={isChecked.rememberCheck}
             type="checkbox"
             className="w-[20px] h-[20px] mt-1 cursor-pointer accent-blue-500"
           />
@@ -84,6 +146,9 @@ export default function LoginPage() {
 
         <div className="flex gap-2 mb-4">
           <input
+            onChange={handleChecks}
+            name="agreePrivacy"
+            checked={isChecked.agreePrivacy}
             type="checkbox"
             className="w-[20px] h-[20px] mt-1 cursor-pointer accent-blue-500"
           />
@@ -116,9 +181,12 @@ export default function LoginPage() {
               <path d="m12 5 7 7-7 7" />
             </svg>
           </button>
-          <button className="flex-1 text-xs text-white font-medium py-2 rounded-lg bg-blue-500 hover:bg-blue-700 transition-all transform">
+          <Link
+            to="/signuppage"
+            className="flex-1 text-xs text-center text-white font-medium py-2 rounded-lg bg-blue-500 hover:bg-blue-700 transition-all transform"
+          >
             Create Account
-          </button>
+          </Link>
         </div>
 
         <div className="flex text-center justify-center mt-4 hover:cursor-pointer">

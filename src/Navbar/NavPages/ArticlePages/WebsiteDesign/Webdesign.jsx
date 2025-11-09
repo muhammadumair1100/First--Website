@@ -1,13 +1,17 @@
 import HeroSection from "./HeroSection";
 import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
+import {
+  websiteFirstSection,
+  websiteSecondSection,
+} from "../../Pagesdata/websitedesign";
 
 const Webdesign = () => {
   return (
-    <div className="bg-white">
+    <div>
       <HeroSection />
-      <FirstSection />
-      <SecondSection />
+      <FirstSection cardData={websiteFirstSection} />
+      <SecondSection cardData={websiteSecondSection} />
     </div>
   );
 };

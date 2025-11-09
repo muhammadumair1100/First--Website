@@ -1,9 +1,22 @@
 import { useState } from "react";
 import AppsData from "./MenuData/AppsData";
 import ArticleData from "./MenuData/ArticleData";
-// import { useParams, Link } from "react-router-dom";
 
 function AppArticle() {
+  const [show, setShow] = useState({
+    apps: false,
+    article: false,
+  });
+
+  const showToggle = (m) => {
+    setShow((prev) => {
+      return {
+        apps: m === "apps" ? !prev.apps : false,
+        article: m === "article" ? !prev.article : false,
+      };
+    });
+  };
+
   const appsData = [
     {
       menuTitle: "Postcards",
@@ -32,20 +45,6 @@ function AppArticle() {
     { title: "Bootstrap" },
     { title: "Resources" },
   ];
-
-  const [show, setShow] = useState({
-    apps: false,
-    article: false,
-  });
-
-  const showToggle = (m) => {
-    setShow((prev) => {
-      return {
-        apps: m === "apps" ? !prev.apps : false,
-        article: m === "article" ? !prev.article : false,
-      };
-    });
-  };
 
   return (
     <div className="hidden md:block md:flex gap-10 relative z-50">
